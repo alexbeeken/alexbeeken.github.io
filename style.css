@@ -71,7 +71,7 @@ body {
   border: 2px solid black;
   border-radius: 10px;
   width: 200px;
-  height: 110px;
+  height: 130px;
   padding: 20px;
   background: #ffd1e5;
 }
@@ -94,7 +94,11 @@ body {
 }
 
 .shows .place {
-  margin-bottom: 20px;
+  float: left;
+}
+
+.shows .price {
+  font-size: 18px;
   float: left;
 }
 
