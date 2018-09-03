@@ -68,8 +68,8 @@ body {
 }
 
 .show {
-  border: 2px solid black;
-  border-radius: 10px;
+  border-radius: 5px;
+  box-shadow: 5px 10px #515151;
   width: 200px;
   height: 130px;
   padding: 20px;
