@@ -1,45 +1,78 @@
 import React from 'react';
 import NavButton from './nav-button.js';
+import helpers from './helpers.js';
+
+const SCALARS = [
+  {
+    name: "chromatic",
+    scalar: 1,
+  },
+  {
+    name: "forward",
+    scalar: 7,
+  },
+  {
+    name: "backward",
+    scalar: 5,
+  },
+];
 
 class KeyNav extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      order: 'chromatic'
+      scalarIndex: 0,
+      startingNote: 0
     }
   }
 
-  changeOrder() {
-    console.log(this.state.order);
-    if (this.state.order === 'chromatic') {
-      this.setState({ order: 'fifths'});
-    } else {
-      this.setState({ order: 'chromatic'});
-    };
-    return true;
+  incrementScalarIndex() {
+    this.setScalarIndex(this.nextScalar());
   }
 
-  order(scalar) {
-    if (this.state.order === 'chromatic') {
-      return [...Array(12).keys()]
-    } else {
-      return [...Array(12).keys()].map(x => (x * scalar) % 12);
-    };
+  setScalarIndex(newScalarIndex) {
+    this.setState({ scalarIndex: newScalarIndex});
+  }
+
+  newArray() {
+    // adjust based on starting note
+    return Array(12).keys()
+  }
+
+  order() {
+    let numbers = [...this.newArray()].map(x => (x * this.currentScalar()) % 12);
+    let set = [...new Set(numbers)];
+    set.filter((item, index) => set.indexOf(item) === index);
+    set.reduce(
+      (unique, item) => (unique.includes(item) ? unique : [...unique, item]),
+      [],
+    );
+    return set;
+  }
+
+  nextScalar() {
+    return (this.state.scalarIndex + 1) % 3;
+  }
+
+  currentCycleName() {
+    return SCALARS[this.state.scalarIndex].name;
+  }
+
+  currentScalar() {
+    return SCALARS[this.state.scalarIndex].scalar;
   }
 
   render() {
     return(
       <div className="container-xxl">
-        <div className="row" key="keynav1">
-          <button className="btn btn-primary btn-sm" onClick={this.changeOrder.bind(this)}>
-            change to {this.state.order} 
-          </button>
-        </div>
+        <button className="btn btn-primary btn-sm" onClick={this.incrementScalarIndex.bind(this)}>
+          {this.currentCycleName()}
+        </button>
         <div className="row" key="keynav2">
-          {this.order(5).map((number) => {
+          {this.order(5).map((number, index) => {
             return(
-              <div className="col-md" key={number}>
+              <div className="col-md" key={"${number}-${index}"}>
                 <NavButton key={number} mkey={number} />            
               </div>
             )

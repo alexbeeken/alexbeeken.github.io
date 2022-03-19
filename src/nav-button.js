@@ -12,7 +12,7 @@ class NavButton extends React.Component {
 
   render() {
     return (
-      <button className="btn btn-light">{helpers.numToName(this.state.mkey)}</button>
+      <button className="btn btn-light">{helpers.numToNoteName(this.state.mkey)}</button>
     )
   }
 }
