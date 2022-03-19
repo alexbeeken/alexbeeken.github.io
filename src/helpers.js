@@ -5,7 +5,7 @@ const NOTE_NAMES = [
 'Eb',
 'E',
 'F',
-'F#/Gb',
+'F#',
 'G',
 'Ab',
 'A',
