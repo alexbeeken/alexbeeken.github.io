@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/alexbeeken.github.io/static/css/main.073c9b0a.css",
+    "main.js": "/alexbeeken.github.io/static/js/main.ad9fd029.js",
+    "static/js/787.d0696e67.chunk.js": "/alexbeeken.github.io/static/js/787.d0696e67.chunk.js",
+    "static/media/logo.svg": "/alexbeeken.github.io/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/alexbeeken.github.io/index.html",
+    "main.073c9b0a.css.map": "/alexbeeken.github.io/static/css/main.073c9b0a.css.map",
+    "main.ad9fd029.js.map": "/alexbeeken.github.io/static/js/main.ad9fd029.js.map",
+    "787.d0696e67.chunk.js.map": "/alexbeeken.github.io/static/js/787.d0696e67.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.ad9fd029.js"
+  ]
+}
