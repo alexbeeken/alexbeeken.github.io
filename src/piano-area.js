@@ -7,6 +7,7 @@ class PianoArea extends React.Component {
     super(props);
 
     this.state = {
+      updateNotes: props.updateNotes,
       activeNotes: []
     }
   }
@@ -29,7 +30,7 @@ class PianoArea extends React.Component {
 
   render() {
     const firstNote = MidiNumbers.fromNote('c3');
-    const lastNote = MidiNumbers.fromNote('f5');
+    const lastNote = MidiNumbers.fromNote('c5');
     const keyboardShortcuts = KeyboardShortcuts.create({
       firstNote: firstNote,
       lastNote: lastNote,
@@ -37,22 +38,24 @@ class PianoArea extends React.Component {
     });
 
     return (
-      <Piano
-        activeNotes={this.state.activeNotes}
-        noteRange={{ first: firstNote, last: lastNote }}
-        useTouchEvents={false}
-        onPlayNoteInput={(midiNumber) => {
-        }}
-        onStopNoteInput={(midiNumber) => {
-        }}
-        stopNote={(midiNumber) => {
-          this.fooToggleActiveNote(midiNumber); 
-        }}
-        playNote={(midiNumber) => {
-        }}
-        width={1000}
-        keyboardShortcuts={keyboardShortcuts}
-      />
+      <div className="container-xxl">
+        <Piano
+          activeNotes={this.state.activeNotes}
+          noteRange={{ first: firstNote, last: lastNote }}
+          useTouchEvents={false}
+          onPlayNoteInput={(midiNumber) => {
+          }}
+          onStopNoteInput={(midiNumber) => {
+          }}
+          stopNote={(midiNumber) => {
+            this.fooToggleActiveNote(midiNumber); 
+          }}
+          playNote={(midiNumber) => {
+          }}
+          width={1000}
+          keyboardShortcuts={keyboardShortcuts}
+        />
+      </div>
     );
   }
 }
