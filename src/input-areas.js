@@ -10,29 +10,39 @@ class InputAreas extends React.Component {
 
     this.state = {
       activeNotes: [],
+      guitarStrings: [null, null, null, null, null, null],
       guitarStrings: [null, null, null, null, null, null]
     }
   }
 
-  updateNotesFromGuitar(newNotes) {
-    let convertedNotes = newNotes.map((note) => {
-      if (note === null) { continue; };
-      return helpers.fretToMidiNumber(newNotes);
+  updateNotesFromGuitar = (newNotes) => {
+    console.log('newNotes');
+    console.log(newNotes);
+
+    let convertedNotes = newNotes.map((note, index) => {
+      return helpers.fretToMidiNumber(note, index + 1);
     });
-    this.updateNotes(convertedNotes);
+    let convertedFrets = convertedNotes.map((note, index) => {
+      return helpers.midiNumberToFret(note, index + 1);
+    });
+
+    this.setState({
+      activeNotes: convertedNotes,
+      guitarStrings: convertedFrets
+    })
   }
 
   updateNotes(newNotes) {
-    console.log(newNotes);
   }
 
   render() {
+    console.log(this.state.guitarStrings);
     return(
       <div className="container">
         <ul className="navbar-nav mr-auto">
           <KeyNav />
         </ul>
-        <PianoArea updateNotes={this.updateNotes}/>
+        <PianoArea activeNotes={this.state.activeNotes} updateNotes={this.updateNotes}/>
         <GuitarArea updateNotes={this.updateNotesFromGuitar} strings={this.state.guitarStrings}/>
       </div>
     )

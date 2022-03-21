@@ -1,6 +1,5 @@
 import React from 'react';
 import NavButton from './nav-button.js';
-import helpers from './helpers.js';
 
 const SCALARS = [
   {
@@ -72,7 +71,7 @@ class KeyNav extends React.Component {
         <div className="row" key="keynav2">
           {this.order(5).map((number, index) => {
             return(
-              <div className="col-md" key={"${number}-${index}"}>
+              <div className="col-md" key={`${number}-${index}`}>
                 <NavButton key={number} mkey={number} />            
               </div>
             )

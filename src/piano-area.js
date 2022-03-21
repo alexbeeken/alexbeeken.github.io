@@ -29,18 +29,13 @@ class PianoArea extends React.Component {
   }
 
   render() {
-    const firstNote = MidiNumbers.fromNote('c3');
-    const lastNote = MidiNumbers.fromNote('c5');
-    const keyboardShortcuts = KeyboardShortcuts.create({
-      firstNote: firstNote,
-      lastNote: lastNote,
-      keyboardConfig: KeyboardShortcuts.HOME_ROW,
-    });
+    const firstNote = MidiNumbers.fromNote('e2');
+    const lastNote = MidiNumbers.fromNote('b4');
 
     return (
       <div className="container-xxl">
         <Piano
-          activeNotes={this.state.activeNotes}
+          activeNotes={this.props.activeNotes}
           noteRange={{ first: firstNote, last: lastNote }}
           useTouchEvents={false}
           onPlayNoteInput={(midiNumber) => {
@@ -53,7 +48,6 @@ class PianoArea extends React.Component {
           playNote={(midiNumber) => {
           }}
           width={1000}
-          keyboardShortcuts={keyboardShortcuts}
         />
       </div>
     );
