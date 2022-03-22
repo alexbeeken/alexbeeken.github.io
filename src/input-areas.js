@@ -2,7 +2,18 @@ import React from 'react';
 import KeyNav from './key-nav.js';
 import PianoArea from './piano-area.js';
 import GuitarArea from './guitar-area.js';
+import Exercizes from './exercizes.js';
 import helpers from './helpers.js';
+
+const LYDIAN = [
+ 1,
+ 3,
+ 5,
+ 7,
+ 8,
+ 10,
+ 12
+]
 
 class InputAreas extends React.Component {
   constructor(props) {
@@ -32,18 +43,30 @@ class InputAreas extends React.Component {
     })
   }
 
-  updateNotes(newNotes) {
+  setLydian(newNotes) {
+    console.log('change notes');
+    console.log(newNotes);
+    this.setState({
+      activeNotes: LYDIAN,
+    })
   }
 
   render() {
     console.log(this.state.guitarStrings);
     return(
-      <div className="container">
+      <div>
         <ul className="navbar-nav mr-auto">
           <KeyNav />
         </ul>
-        <PianoArea activeNotes={this.state.activeNotes} updateNotes={this.updateNotes}/>
-        <GuitarArea updateNotes={this.updateNotesFromGuitar} strings={this.state.guitarStrings}/>
+        <div className="row">
+          <div className="col-1">
+            <Exercizes setLydian={this.setLydian} />
+          </div>
+          <div className="col-11">
+            <PianoArea activeNotes={this.state.activeNotes} updateNotes={this.updateNotes}/>
+            <GuitarArea updateNotes={this.updateNotesFromGuitar} strings={this.state.guitarStrings}/>
+          </div>
+        </div>
       </div>
     )
   }
