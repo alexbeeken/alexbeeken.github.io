@@ -68,6 +68,9 @@ class InputAreas extends React.Component {
           <li>
             second inversion triad: {calculators.secondInversionTriad(this.normalizedInput())}
           </li>
+          <li>
+            root position seventh: {calculators.rootPositionSeventh(this.normalizedInput())}
+          </li>
         </ul>
       </div>
     )

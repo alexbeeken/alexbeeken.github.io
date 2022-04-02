@@ -32,6 +32,14 @@ const TRIADS = [
   'augmented'
 ]
 
+const SEVENTHS = [
+  'fully diminished',
+  'half diminished',
+  'minor 7th',
+  'dominant 7th',
+  'major 7th'
+]
+
 const ROOT_TRIADS = [
   [
     TRIADS[0],
@@ -68,6 +76,29 @@ const SECOND_INVERSION_TRIADS= [
     null,
     TRIADS[1],
     TRIADS[3],
+  ]
+]
+
+const ROOT_SEVENTHS = [
+  // root to 3rd: minor
+  [
+    // 3rd to fifth: minor
+    [
+      SEVENTHS[0],
+      SEVENTHS[1],
+    ],
+    // 3rd to fifth: major
+    [
+      SEVENTHS[2]
+    ],
+  ],
+  // root to 3rd: major
+  [
+    // 3rd to fifth: minor
+    [
+      SEVENTHS[3],
+      SEVENTHS[4]
+    ]
   ]
 ]
 
@@ -156,6 +187,22 @@ const secondInversionTriad = function(notes) {
   };
 }
 
+const rootPositionSeventh = function(notes) {
+  if (notes.length === 4) {
+    let int1 = intervalNum(notes[0], notes[1]);
+    let int2 = intervalNum(notes[1], notes[2]);
+    let int3 = intervalNum(notes[2], notes[3]);
+
+    if (int1 >= 3 && int1 <= 4 && int2 >= 3 && int2 <= 4 && int3 >= 3 && int3 <= 4) {
+      return ROOT_SEVENTHS[int1 - 3][int2 - 3][int3 - 3];
+    } else {
+      return null;
+    }
+  } else {
+    return null;
+  };
+}
+
 exports.getIntervalNum = getIntervalNum;
 exports.getInvertedIntervalNum = getInvertedIntervalNum;
 exports.getInterval = getInterval;
@@ -163,3 +210,4 @@ exports.getIntervalInversion = getIntervalInversion;
 exports.rootPositionTriad = rootPositionTriad;
 exports.firstInversionTriad = firstInversionTriad;
 exports.secondInversionTriad = secondInversionTriad;
+exports.rootPositionSeventh = rootPositionSeventh;
