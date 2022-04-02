@@ -1,19 +1,8 @@
 import React from 'react';
 import KeyNav from './key-nav.js';
 import PianoArea from './piano-area.js';
-import GuitarArea from './guitar-area.js';
 import Exercizes from './exercizes.js';
-import helpers from './helpers.js';
-
-const LYDIAN = [
- 1,
- 3,
- 5,
- 7,
- 8,
- 10,
- 12
-]
+import calculators from './calculators.js';
 
 class InputAreas extends React.Component {
   constructor(props) {
@@ -21,38 +10,23 @@ class InputAreas extends React.Component {
 
     this.state = {
       activeNotes: [],
-      guitarStrings: [null, null, null, null, null, null],
-      guitarStrings: [null, null, null, null, null, null]
     }
   }
 
-  updateNotesFromGuitar = (newNotes) => {
-    console.log('newNotes');
-    console.log(newNotes);
-
-    let convertedNotes = newNotes.map((note, index) => {
-      return helpers.fretToMidiNumber(note, index + 1);
-    });
-    let convertedFrets = convertedNotes.map((note, index) => {
-      return helpers.midiNumberToFret(note, index + 1);
-    });
-
-    this.setState({
-      activeNotes: convertedNotes,
-      guitarStrings: convertedFrets
+  updateNotes(newNotes) {
+    return this.setState({
+      activeNotes: newNotes.sort()
     })
   }
 
-  setLydian(newNotes) {
-    console.log('change notes');
-    console.log(newNotes);
-    this.setState({
-      activeNotes: LYDIAN,
+  normalizedInput() {
+    return this.state.activeNotes.map((midiNum) => {
+      let startingNum = this.state.activeNotes[0];
+      return (midiNum - startingNum) + 1;
     })
   }
 
   render() {
-    console.log(this.state.guitarStrings);
     return(
       <div>
         <ul className="navbar-nav mr-auto">
@@ -63,10 +37,23 @@ class InputAreas extends React.Component {
             <Exercizes setLydian={this.setLydian} />
           </div>
           <div className="col-11">
-            <PianoArea activeNotes={this.state.activeNotes} updateNotes={this.updateNotes}/>
-            <GuitarArea updateNotes={this.updateNotesFromGuitar} strings={this.state.guitarStrings}/>
+            <PianoArea activeNotes={this.state.activeNotes} updateNotes={this.updateNotes.bind(this)}/>
           </div>
         </div>
+        <ul>
+          <li>
+          activeNotes: {this.state.activeNotes.join(",")}
+          </li>
+          <li>
+          normalizedInput: {this.normalizedInput().join(",")}
+          </li>
+          <li>
+          interval: {calculators.getInterval(this.normalizedInput())}
+          </li>
+          <li>
+          root position triad: {calculators.rootPositionTriad(this.normalizedInput())}
+          </li>
+        </ul>
       </div>
     )
   }

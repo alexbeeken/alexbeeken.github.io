@@ -1,30 +1,27 @@
 import React from 'react';
-import { Piano, KeyboardShortcuts, MidiNumbers } from 'react-piano';
+import { Piano, MidiNumbers } from 'react-piano';
 import 'react-piano/dist/styles.css';
 
 class PianoArea extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      updateNotes: props.updateNotes,
-      activeNotes: []
-    }
+    this.updateNotes = props.updateNotes.bind(this);
   }
 
   toggleActiveNote(newNote) {
-    this.setState((state, props) => ({ activeNotes: [...this.state.activeNotes, newNote]}));
+    this.setState((state, props) => ({ activeNotes: [...this.props.activeNotes, newNote]}));
   }
 
   fooToggleActiveNote(newNote) {
-    let notes = this.state.activeNotes;
+    let notes = this.props.activeNotes;
     let index = notes.indexOf(newNote);
 
     if (index === -1) {
-      this.setState((state, props) => ({ activeNotes: [...notes, newNote]}));
+      this.updateNotes([...notes, newNote])
     } else {
       notes.splice(index, 1);
-      this.setState((state, props) => ({ activeNotes: notes }));
+      this.updateNotes([...notes])
     }
   }
 
