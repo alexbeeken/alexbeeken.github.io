@@ -32,14 +32,6 @@ const TRIADS = [
   'augmented'
 ]
 
-const SEVENTHS = [
-  'fully diminished',
-  'half diminished',
-  'minor 7th',
-  'dominant 7th',
-  'major 7th'
-]
-
 const ROOT_TRIADS = [
   [
     TRIADS[0],
@@ -79,6 +71,14 @@ const SECOND_INVERSION_TRIADS= [
   ]
 ]
 
+const SEVENTHS = [
+  'fully diminished',
+  'half diminished',
+  'minor 7th',
+  'dominant 7th',
+  'major 7th'
+]
+
 const ROOT_SEVENTHS = [
   // root to 3rd: minor
   [
@@ -97,6 +97,37 @@ const ROOT_SEVENTHS = [
     // 3rd to fifth: minor
     [
       SEVENTHS[3],
+      SEVENTHS[4]
+    ]
+  ]
+]
+
+const FIRST_INVERSION_SEVENTHS = [
+  // root to 7th: M6
+  [
+    // root to 3rd: minor
+    [
+      SEVENTHS[0]
+    ]
+  ],
+  // root to 7th: m7
+  [
+    // root to 3rd: minor
+    [
+      SEVENTHS[1],
+      SEVENTHS[2]
+    ],
+    // root to 3rd: major
+    [
+      SEVENTHS[3]
+    ]
+  ],
+  // root to 7th: M7
+  [
+    // root to 3rd: minor
+    [],
+    // root to 3rd: major
+    [
       SEVENTHS[4]
     ]
   ]
@@ -203,6 +234,22 @@ const rootPositionSeventh = function(notes) {
   };
 }
 
+const firstInversionSeventh = function(notes) {
+  if (notes.length === 4) {
+    let int1 = invertedIntervalNum(notes[0], notes[1]);
+    let int2 = intervalNum(notes[1], notes[2]);
+    let int3 = intervalNum(notes[2], notes[3]);
+
+    if (int1 >= 10 && int1 <= 12 && int2 >= 3 && int2 <= 4 && int3 >= 3 && int3 <= 4) {
+      return FIRST_INVERSION_SEVENTHS[int1 - 10][int2 - 3][int3 - 3];
+    } else {
+      return null;
+    }
+  } else {
+    return null;
+  };
+}
+
 exports.getIntervalNum = getIntervalNum;
 exports.getInvertedIntervalNum = getInvertedIntervalNum;
 exports.getInterval = getInterval;
@@ -211,3 +258,4 @@ exports.rootPositionTriad = rootPositionTriad;
 exports.firstInversionTriad = firstInversionTriad;
 exports.secondInversionTriad = secondInversionTriad;
 exports.rootPositionSeventh = rootPositionSeventh;
+exports.firstInversionSeventh = firstInversionSeventh;
