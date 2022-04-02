@@ -42,16 +42,31 @@ class InputAreas extends React.Component {
         </div>
         <ul>
           <li>
-          activeNotes: {this.state.activeNotes.join(",")}
+            activeNotes: {this.state.activeNotes.join(",")}
           </li>
           <li>
-          normalizedInput: {this.normalizedInput().join(",")}
+            normalizedInput: {this.normalizedInput().join(",")}
           </li>
           <li>
-          interval: {calculators.getInterval(this.normalizedInput())}
+            interval number: {calculators.getIntervalNum(this.normalizedInput())}
           </li>
           <li>
-          root position triad: {calculators.rootPositionTriad(this.normalizedInput())}
+            inverted interval number: {calculators.getInvertedIntervalNum(this.normalizedInput())}
+          </li>
+          <li>
+            interval name: {calculators.getInterval(this.normalizedInput())}
+          </li>
+          <li>
+            inverted interval name: {calculators.getIntervalInversion(this.normalizedInput())}
+          </li>
+          <li>
+            root position triad: {calculators.rootPositionTriad(this.normalizedInput())}
+          </li>
+          <li>
+            first inversion triad: {calculators.firstInversionTriad(this.normalizedInput())}
+          </li>
+          <li>
+            second inversion triad: {calculators.secondInversionTriad(this.normalizedInput())}
           </li>
         </ul>
       </div>
