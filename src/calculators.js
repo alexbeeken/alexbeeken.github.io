@@ -133,6 +133,41 @@ const FIRST_INVERSION_SEVENTHS = [
   ]
 ]
 
+const SECOND_INVERSION_SEVENTHS = [
+  // 5th to 7th: m3
+  [
+    // 7th to root (inverted): m6
+    [
+      // root to 3rd: m3
+      SEVENTHS[0]
+    ],
+    // 7th to root (inverted): m7
+    [
+      // root to 3rd: m3
+      SEVENTHS[2],
+      // root to 3rd: M3
+      SEVENTHS[3],
+    ],
+  ],
+  // 5th to 7th: M3
+  [
+    // 7th to root (inverted): M6
+    [],
+    // 7th to root (inverted): m7
+    [
+      // root to 3rd: m3
+      SEVENTHS[1],
+    ],
+    // 7th to root (inverted): M7
+    [
+      // root to 3rd: m3
+      null,
+      // root to 3rd: M3
+      SEVENTHS[4]
+    ],
+  ]
+]
+
 const intervalNum = function(low, high) {
   return high - low; 
 }
@@ -250,6 +285,22 @@ const firstInversionSeventh = function(notes) {
   };
 }
 
+const secondInversionSeventh = function(notes) {
+  if (notes.length === 4) {
+    let int1 = intervalNum(notes[0], notes[1]);
+    let int2 = invertedIntervalNum(notes[1], notes[2]);
+    let int3 = intervalNum(notes[2], notes[3]);
+
+    if (int1 >= 3 && int1 <= 4 && int2 >= 10 && int2 <= 12 && int3 >= 3 && int3 <= 4) {
+      return SECOND_INVERSION_SEVENTHS[int1 - 3][int2 - 10][int3 - 3];
+    } else {
+      return null;
+    }
+  } else {
+    return null;
+  };
+}
+
 exports.getIntervalNum = getIntervalNum;
 exports.getInvertedIntervalNum = getInvertedIntervalNum;
 exports.getInterval = getInterval;
@@ -259,3 +310,4 @@ exports.firstInversionTriad = firstInversionTriad;
 exports.secondInversionTriad = secondInversionTriad;
 exports.rootPositionSeventh = rootPositionSeventh;
 exports.firstInversionSeventh = firstInversionSeventh;
+exports.secondInversionSeventh = secondInversionSeventh;

@@ -74,6 +74,9 @@ class InputAreas extends React.Component {
           <li>
             first inversion seventh: {calculators.firstInversionSeventh(this.normalizedInput())}
           </li>
+          <li>
+            second inversion seventh: {calculators.secondInversionSeventh(this.normalizedInput())}
+          </li>
         </ul>
       </div>
     )
