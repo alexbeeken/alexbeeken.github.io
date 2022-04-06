@@ -107,8 +107,10 @@ const FIRST_INVERSION_SEVENTHS = [
   [
     // root to 3rd: minor
     [
-      SEVENTHS[0]
-    ]
+      SEVENTHS[0],
+      null
+    ],
+    []
   ],
   // root to 7th: m7
   [
@@ -119,7 +121,8 @@ const FIRST_INVERSION_SEVENTHS = [
     ],
     // root to 3rd: major
     [
-      SEVENTHS[3]
+      SEVENTHS[3],
+      null
     ]
   ],
   // root to 7th: M7
@@ -128,7 +131,8 @@ const FIRST_INVERSION_SEVENTHS = [
     [],
     // root to 3rd: major
     [
-      SEVENTHS[4]
+      SEVENTHS[4],
+      null
     ]
   ]
 ]
@@ -176,15 +180,19 @@ const THIRD_INVERSION_SEVENTHS = [
       // 7th to root (inverted): M6
       SEVENTHS[0], 
       // 7th to root (inverted): m7
-      SEVENTHS[3]
+      SEVENTHS[3],
+      null
     ],
     // 5th to 7th: M3
     [
+      // 7th to root (inverted): M6
       null,
+      // 7th to root (inverted): m7
       SEVENTHS[1],
-      SEVENTHS[2],
+      // 7th to root (inverted): M7
+      SEVENTHS[4]
     ],
-  ]
+  ],
   // 3rd to 5th: M3
   [
     // 5th to 7th: m3
@@ -192,7 +200,8 @@ const THIRD_INVERSION_SEVENTHS = [
       // 7th to root (inverted): M6
       null,
       // 7th to root (inverted): m7
-      SEVENTHS[4]
+      SEVENTHS[2],
+      null
     ]
   ]
 ]
@@ -319,7 +328,7 @@ const secondInversionSeventh = function(notes) {
     let int1 = intervalNum(notes[0], notes[1]);
     let int2 = invertedIntervalNum(notes[1], notes[2]);
     let int3 = intervalNum(notes[2], notes[3]);
-
+ 
     if (int1 >= 3 && int1 <= 4 && int2 >= 10 && int2 <= 12 && int3 >= 3 && int3 <= 4) {
       return SECOND_INVERSION_SEVENTHS[int1 - 3][int2 - 10][int3 - 3];
     } else {
@@ -333,8 +342,8 @@ const secondInversionSeventh = function(notes) {
 const thirdInversionSeventh = function(notes) {
   if (notes.length === 4) {
     let int1 = intervalNum(notes[0], notes[1]);
-    let int3 = intervalNum(notes[1], notes[2]);
-    let int2 = invertedIntervalNum(notes[2], notes[3]);
+    let int2 = intervalNum(notes[1], notes[2]);
+    let int3 = invertedIntervalNum(notes[2], notes[3]);
 
     if (int1 >= 3 && int1 <= 4 && int2 >= 3 && int2 <= 4 && int3 >= 10 && int3 <= 12) {
       return THIRD_INVERSION_SEVENTHS[int1 - 3][int2 - 3][int3 - 10];
